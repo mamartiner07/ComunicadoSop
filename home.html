@@ -87,7 +87,7 @@
     .body-section {
       display: grid; grid-template-columns: 1.45fr 0.55fr;
       background: #f68121; color: #fff; min-height: 360px; padding: 24px 28px; gap: 0;
-      align-items: start; /* start para que pueda crecer hacia abajo */
+      align-items: start; 
     }
 
     /* Columna izquierda: texto literal + descripción */
@@ -99,17 +99,7 @@
     .mensaje-centrado p { font-size: 18px; line-height: 1.6; color: #fff; }
     .mensaje-centrado p strong { font-weight: 800; }
 
-    /* Descripción dentro del bloque naranja (SIN límites ni scroll) */
-    .desc-box {
-      margin-top: 16px; width: 100%;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.35);
-      border-radius: 8px; padding: 14px 16px;
-      text-align: left; color: #fff; font-size: 15px; line-height: 1.6;
 
-
-    }
-    .desc-title { font-weight: 700; margin-bottom: 6px; letter-spacing: .2px; }
 
     /* Columna derecha: ícono + fecha/hora */
     .body-right { display: grid; place-items: center; text-align: center; gap: 12px; }
@@ -187,15 +177,9 @@
       <div class="mensaje-centrado">
         <p>Estimado usuario:</p>
         <p>Le informamos que se está presentando una falla en el sistema</p>
-        <p> <strong id="sistema-text">SISTEMA</strong> el cual está siendo atendido con el ticket 
-        <p><strong id="ticket-text">INC000XXXXXXXX</strong> por parte de los especialistas del grupo <strong id="grupo-text">GRUPO</strong></p></p>
-        
-
-        <!-- Descripción dentro del bloque naranja: crece sin límites -->
-        <div class="desc-box" id="desc-box">
-          <div class="desc-title">Descripción</div>
-          <div id="descripcion-text">—</div>
-        </div>
+        <p> <strong id="sistema-text">SISTEMA</strong> el cual está siendo atendido con el ticket </p>
+        <p><strong id="ticket-text">INC000XXXXXXXX</strong> por parte de los especialistas del grupo <strong id="grupo-text">GRUPO</strong></p>
+        <p>dicha falla provoca que <span id="descripcion-text">—</span></p>
       </div>
 
       <!-- Columna derecha: ícono (PNG transparente) + fecha/hora -->
