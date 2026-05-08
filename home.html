@@ -412,11 +412,19 @@
             <!-- Columna izquierda: TEXTO LITERAL + DESCRIPCIÓN (SIN scroll interno) -->
             <div class="mensaje-centrado">
                 <p>Estimado usuario:</p>
-                <p>Le informamos que se está presentando una falla en el sistema</p>
-                <p> <strong id="sistema-text">SISTEMA</strong> el cual está siendo atendido con el ticket </p>
-                <p><strong id="ticket-text">INC000XXXXXXXX</strong> por parte de los especialistas del grupo</p>
-                <p><strong id="grupo-text">GRUPO</strong> dicha falla provoca que <span id="descripcion-text">—</span>.
-                </p>
+                
+                <!-- Bloque para Falla con Ticket -->
+                <div id="preview-con-ticket">
+                    <p>Le informamos que se está presentando una falla en el sistema</p>
+                    <p> <strong id="sistema-text">SISTEMA</strong> el cual está siendo atendido con el ticket </p>
+                    <p><strong id="ticket-text">INC000XXXXXXXX</strong> por parte de los especialistas del grupo</p>
+                    <p><strong id="grupo-text">GRUPO</strong> dicha falla provoca que <span id="descripcion-text">—</span>.</p>
+                </div>
+
+                <!-- Bloque para Falla sin Ticket -->
+                <div id="preview-sin-ticket" style="display: none;">
+                    <p id="personalizado-text-preview" style="white-space: pre-wrap;"></p>
+                </div>
             </div>
 
             <!-- Columna derecha: ícono (PNG transparente) + fecha/hora -->
@@ -448,7 +456,11 @@
                 sistema: '#sistema', ticket: '#ticket', grupo: '#grupo', descripcion: '#descripcion',
                 personalizado: '#texto-personalizado',
                 sistemaText: '#sistema-text', ticketText: '#ticket-text', grupoText: '#grupo-text',
-                descripcionTxt: '#descripcion-text', fecha: '#fecha-text', hora: '#hora-text',
+                descripcionTxt: '#descripcion-text', 
+                personalizadoTextPreview: '#personalizado-text-preview',
+                previewConTicket: '#preview-con-ticket',
+                previewSinTicket: '#preview-sin-ticket',
+                fecha: '#fecha-text', hora: '#hora-text',
                 wrapper: '.wrapper', form: '#comunicado-form'
             };
 
@@ -482,12 +494,17 @@
                     $(ids.ticketText).textContent = val(ids.ticket) || 'INC000XXXXXXXX';
                     $(ids.grupoText).textContent = val(ids.grupo) || 'GRUPO';
                     $(ids.descripcionTxt).textContent = val(ids.descripcion) || 'Descripción del incidente...';
-                    // Mostrar filas estándar
-                    document.querySelectorAll('.content-row').forEach(row => row.style.display = 'flex');
+                    
+                    // Mostrar bloque con ticket y ocultar el otro
+                    $(ids.previewConTicket).style.display = 'block';
+                    $(ids.previewSinTicket).style.display = 'none';
                 } else {
-                    // Modo Sin Ticket: Mapear texto libre al cuadro de descripción y ocultar filas superiores
-                    $(ids.descripcionTxt).innerText = val(ids.personalizado) || 'Información del incidente...';
-                    document.querySelectorAll('.content-row').forEach(row => row.style.display = 'none');
+                    // Modo Sin Ticket: Mapear texto libre al contenedor personalizado
+                    $(ids.personalizadoTextPreview).innerText = val(ids.personalizado) || 'Información del incidente...';
+                    
+                    // Ocultar bloque con ticket y mostrar el personalizado
+                    $(ids.previewConTicket).style.display = 'none';
+                    $(ids.previewSinTicket).style.display = 'block';
                 }
                 updateDateTime();
             }
