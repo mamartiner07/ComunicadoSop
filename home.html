@@ -463,7 +463,7 @@
                 });
                 // Actualizar contenido de formularios
                 document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.toggle('active', content.id === tabId);
+                    content.classList.toggle('active', content.id === 'content-' + tabId);
                 });
                 updatePreviewFromForm();
             };
